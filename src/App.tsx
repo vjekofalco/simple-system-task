@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState } from 'react'
+import './App.css'
+import { UserResponseData, fetchGitHubUsers } from './utils/fetchGitHubUsers'
+import { NUMBER_OF_EXTRA_USERS } from './consts'
+import { GithubUserComponent } from './components/GithubUser'
+import { SearchBar } from './components/SearchBar'
 
 function App() {
+  const [users, setUsers] = useState<UserResponseData[]>([])
+
+  const getUsers = useCallback(async (userName: string) => {
+    const users = await fetchGitHubUsers(userName, NUMBER_OF_EXTRA_USERS)
+    setUsers(users)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <section>
+      <SearchBar onSubmit={getUsers} />
+      {users.map((user) => (
+        <GithubUserComponent
+          key={user.id}
+          login={user.login}
+          repos_url={user.repos_url}
+        />
+      ))}
+    </section>
+  )
 }
 
-export default App;
+export default App

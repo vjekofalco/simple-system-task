@@ -1,0 +1,2 @@
+export const GITHUB_NAME_MAX_CHARATERS = 39
+export const NUMBER_OF_EXTRA_USERS = 4

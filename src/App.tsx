@@ -9,7 +9,11 @@ function App() {
   const [username, setUsername] = useState('')
 
   const getUsers = useCallback(async (userName: string) => {
-    const users = await fetchGitHubUsers(userName, NUMBER_OF_EXTRA_USERS)
+    const formattedUsername = userName.toLocaleLowerCase().replaceAll(/\s/g, '')
+    const users = await fetchGitHubUsers(
+      formattedUsername,
+      NUMBER_OF_EXTRA_USERS
+    )
 
     setUsers(users)
     setUsername(userName)

@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'clsx'
 
-import { ArrowDown } from '../Icons/ArrowDown'
+import { ArrowDown } from '../icons/ArrowDown'
 
 type Props = {
   userName: string

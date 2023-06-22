@@ -1,44 +1,42 @@
-import React, { useCallback, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import cx from 'clsx'
 
-import { UserResponseData } from '../utils/fetchGitHubUsers'
+import { UserResponseData } from '../../utils/fetchGitHubUsers'
 import {
   ListUserReposResponseData,
   fetchGitHubUserRepos,
-} from '../utils/fetchGitHubUserRepos'
-import { GitHubUserRepoInfo } from './GithubUserRepoInfo'
-import { ArrowDown } from './icons/ArrowDown'
+} from '../../utils/fetchGitHubUserRepos'
+import { GitHubUserRepoInfo } from '../GithubUserRepoInfo'
+import { UserRow } from './UserRow'
 
 type Props = Pick<UserResponseData, 'login' | 'repos_url'>
 
-export const GithubUserComponent = ({ login, repos_url }: Props) => {
+const GithubUserComponentPlain = ({ login, repos_url }: Props) => {
   const [repos, setRepos] = useState<ListUserReposResponseData[]>([])
   const [isOpen, setIsOpen] = useState(false)
+  const [isReposFetched, setIsReposFetched] = useState(false)
 
   const handleClick = useCallback(async () => {
-    if (repos.length > 0) {
+    if (isReposFetched) {
       setIsOpen(!isOpen)
     } else {
       const repos = await fetchGitHubUserRepos(repos_url)
+
       setRepos(repos)
+      setIsReposFetched(true)
       setIsOpen(true)
     }
-  }, [isOpen, repos])
+  }, [isOpen, repos, isReposFetched])
 
   return (
     <div className="space-y-s">
+      <UserRow userName={login} isOpen={isOpen} handleClick={handleClick} />
       <div
-        className="bg-greyDark p-s font-bold flex justify-between items-center cursor-pointer"
-        onClick={handleClick}
+        className={cx(
+          'pl-m space-y-s ease-in duration-100 overflow-hidden',
+          isOpen ? `h-[${repos.length * 100}px]` : 'h-0'
+        )}
       >
-        <div>{login}</div>
-        <div
-          className={cx('w-m h-m ease-in duration-100', isOpen && 'rotate-180')}
-        >
-          <ArrowDown />
-        </div>
-      </div>
-      <div className="pl-m space-y-s">
         {repos.length > 0 ? (
           repos.map((repo) => (
             <GitHubUserRepoInfo
@@ -61,3 +59,5 @@ export const GithubUserComponent = ({ login, repos_url }: Props) => {
     </div>
   )
 }
+
+export const GithubUserComponent = memo(GithubUserComponentPlain)

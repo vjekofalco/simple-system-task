@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import './App.css'
 import { UserResponseData, fetchGitHubUsers } from './utils/fetchGitHubUsers'
 import { NUMBER_OF_EXTRA_USERS } from './consts'
 import { GithubUserComponent } from './components/GithubUser'
@@ -9,21 +8,12 @@ function App() {
   const [users, setUsers] = useState<UserResponseData[]>([])
   const [username, setUsername] = useState('')
 
-  const getUsers = useCallback(
-    async (userName: string) => {
-      const fetchedUsers = await fetchGitHubUsers(
-        userName,
-        NUMBER_OF_EXTRA_USERS
-      )
-      const newUsers = fetchedUsers.filter(
-        (user) => !users.some((u) => u.id === user.id)
-      )
+  const getUsers = useCallback(async (userName: string) => {
+    const users = await fetchGitHubUsers(userName, NUMBER_OF_EXTRA_USERS)
 
-      setUsers([...users, ...newUsers])
-      setUsername(userName)
-    },
-    [users]
-  )
+    setUsers(users)
+    setUsername(userName)
+  }, [])
 
   return (
     <section className="my-0 mx-auto max-w-[720px] p-m bg-white space-y-m">

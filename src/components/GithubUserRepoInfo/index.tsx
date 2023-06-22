@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ListUserReposResponseData } from '../../utils/fetchGitHubUserRepos'
-import { Star } from '../icons/Star'
+import { Star } from '../Icons/Star'
 
 type Props = Pick<
   ListUserReposResponseData,

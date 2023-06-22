@@ -1,6 +1,5 @@
 import { Endpoints } from '@octokit/types'
 import { request } from '@octokit/request'
-
 import { generateFormatedGitHubName } from './generateFormatedGitHubName'
 
 export type UserResponseData =
@@ -14,6 +13,7 @@ const fetchGitHubUser = (userName: string): Promise<UserResponseData> =>
   })
     .then((response) => response.data)
     .catch((e) => {
+      // eslint-disable-next-line no-console
       console.error(e)
     })
 

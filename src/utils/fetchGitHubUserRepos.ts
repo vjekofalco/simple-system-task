@@ -11,7 +11,10 @@ export const fetchGitHubUserRepos = (
     headers: {
       authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
     },
-  }).then((response) => response.data)
+  })
+    .then((response) => response.data)
+    // eslint-disable-next-line no-console
+    .catch((e) => console.error(e))
 
   return repos
 }

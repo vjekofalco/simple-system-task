@@ -1,5 +1,6 @@
 import { Endpoints } from '@octokit/types'
 import { request } from '@octokit/request'
+
 import { generateFormatedGitHubName } from './generateFormatedGitHubName'
 
 export type UserResponseData =
@@ -10,7 +11,11 @@ const fetchGitHubUser = (userName: string): Promise<UserResponseData> =>
     headers: {
       authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
     },
-  }).then((response) => response.data)
+  })
+    .then((response) => response.data)
+    .catch((e) => {
+      console.error(e)
+    })
 
 export const fetchGitHubUsers = async (
   userName: string,

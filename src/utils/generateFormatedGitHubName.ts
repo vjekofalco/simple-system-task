@@ -1,7 +1,7 @@
 import { GITHUB_NAME_MAX_CHARATERS } from '../consts'
 
 const GITHUB_NAME_ALLOWED_CHARACTERS =
-  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy-'
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-'
 
 export const generateFormatedGitHubName = (inputValue: string) => {
   const charactersLeft = GITHUB_NAME_MAX_CHARATERS - inputValue.length

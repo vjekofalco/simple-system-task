@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { GitHubUserRepoInfo } from '.'
+import { GitHubUserRepoInfo } from './GithubUserRepoInfo'
 
 const meta: Meta<typeof GitHubUserRepoInfo> = {
   component: GitHubUserRepoInfo,

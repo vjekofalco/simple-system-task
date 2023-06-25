@@ -24,6 +24,10 @@ Choice of CI/CD platform is GitHubs [GitHub Actions](https://docs.github.com/en/
 
 To style application in this project, we are using [Tailwind](https://tailwindcss.com/) as CSS utility. Tailwind provides nice way to configure basics blocks of style guide like colors, spacings, font sizes, breaking points... Also it speeds up development process by bringing bootstrap like feeling when implementing styles.
 
+## Application state management
+
+As application state management library for this app it is used [Zustand](https://github.com/pmndrs/zustand). Way smaller in size than Redux but jet simple and powerful and plays nicely with TypeScript
+
 ## Testing
 
 With increasing applications complexity, complexity of tests should increase by bringing parts of testing pyramid to the workflow. When it comes to the testing react components mine preferred way to test them would be snapshot/visual testing. It gives us ability te test component as a unit together with implemented styles while lowering down styling bugs. For automating visual tests and storing snapshots we are using [Chromatic](https://www.chromatic.com/) in together with [Storybook](https://storybook.js.org/) which gives us a nice way of building and testing components in isolation.
@@ -36,14 +40,9 @@ With increasing applications complexity, complexity of tests should increase by 
 
 Application is fairly simple therefor it is missing some elements of large application like:
 
-## Application state management library
+## Memoizing "selectors"
 
-Piling up components increases application complexity and complicates a way how components are sharing data. This often leeds to props drilling. To overachieve this problem, most often developers are introducing application state management library. Depending ont the project, requirements and team setup mine choice would be:
-
-1. [Redux](https://redux.js.org/) which implements Flux patters and it is become usual choice for state management library.
-2. [Zustand](https://github.com/pmndrs/zustand). Way smaller in size than Redux but jet simple and powerful.
-
-Both libraries plays nicely with TypeScript and what is more important with [Reselect](https://www.npmjs.com/package/reselect) which gives us opportunity to make memoised state "selectors".
+[Reselect](https://www.npmjs.com/package/reselect) which gives us opportunity to make memoised state "selectors".
 
 ## More robust testing
 

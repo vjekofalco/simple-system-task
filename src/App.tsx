@@ -1,21 +1,16 @@
 import React, { useCallback, useState } from 'react'
-import { UserResponseData, fetchGitHubUsers } from './utils/fetchGitHubUsers'
-import { NUMBER_OF_EXTRA_USERS } from './consts'
+
 import { GithubUserComponent } from './components/GithubUser'
 import { SearchBar } from './components/SearchBar'
+import { useStore } from './store'
 
 function App() {
-  const [users, setUsers] = useState<UserResponseData[]>([])
   const [username, setUsername] = useState('')
+  const { users, setGitHubUsers } = useStore((state) => state)
 
   const getUsers = useCallback(async (userName: string) => {
     const formattedUsername = userName.toLocaleLowerCase().replaceAll(/\s/g, '')
-    const users = await fetchGitHubUsers(
-      formattedUsername,
-      NUMBER_OF_EXTRA_USERS
-    )
-
-    setUsers(users)
+    setGitHubUsers(formattedUsername)
     setUsername(userName)
   }, [])
 
@@ -32,6 +27,7 @@ function App() {
           {users.map((user) => (
             <GithubUserComponent
               key={user.id}
+              id={user.id}
               login={user.login}
               repos_url={user.repos_url}
             />

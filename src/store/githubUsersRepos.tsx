@@ -1,6 +1,5 @@
 import { StateCreator } from 'zustand'
 
-import { NUMBER_OF_EXTRA_USERS } from '../consts'
 import {
   ListUserReposResponseData,
   fetchGitHubUserRepos,

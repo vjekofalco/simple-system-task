@@ -30,11 +30,11 @@ As application state management library for this app it is used [Zustand](https:
 
 ## Testing
 
-With increasing applications complexity, complexity of tests should increase by bringing parts of testing pyramid to the workflow. When it comes to the testing react components mine preferred way to test them would be snapshot/visual testing. It gives us ability te test component as a unit together with implemented styles while lowering down styling bugs. For automating visual tests and storing snapshots we are using [Chromatic](https://www.chromatic.com/) in together with [Storybook](https://storybook.js.org/) which gives us a nice way of building and testing components in isolation.
+With increasing applications complexity, complexity of tests should increase by bringing parts of testing pyramid to the workflow. When it comes to the testing react components mine preferred way to test them would be snapshot/visual testing. It gives us ability te test component as a unit together with implemented styles while lowering down styling bugs. For automating visual tests and storing snapshots we are using [Chromatic](https://www.chromatic.com/). Together with [Storybook](https://storybook.js.org/) gives us a nice way of building and testing components in isolation.
 
 ## Octokit
 
-[Octokit](https://github.com/octokit) is SDK for the GitHub API. It offers response typings and abstracted requests functionalities.
+[Octokit](https://github.com/octokit) is SDK for the GitHub API. It offers response typings and abstracts requests functionalities.
 
 # Future improvement plans
 
